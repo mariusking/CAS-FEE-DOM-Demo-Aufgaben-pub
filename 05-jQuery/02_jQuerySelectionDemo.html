@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WED1 JQuery Selection Demo</title>
+    <script src="jquery-3.3.1.js"></script>
+    <script>
+        jQuery(function($) {
+            console.log("p", $("p"));
+            console.log("p > span", $("p > span"));
+            console.log("button span", $("button span"));
+            console.log("button span .eq(2)", $("p > span").eq(2));
+            console.log("p > span:nth-child(2)", $("p > span:nth-child(2)"));
+            console.log("p > span:contains('Query')", $("p > span:contains('Query')"));
+        })
+    </script>
+</head>
+<body>
+<h1>JQuery DOM Selection</h1>
+<p>
+    <span>DOM</span>
+    <span>Selection</span>
+    <span>with</span>
+    <span>JQuery</span>
+</p>
+<p>
+    <button>press <span>me</span></button>
+</p>
+<p>
+    <label>enter name<input />
+    </label>
+</p>
+<div id="output">
+</div>
+</body>
+</html>

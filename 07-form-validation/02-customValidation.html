@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Form Validation Demo (using browser error display)</title>
+  <style>
+    label {
+      display: block;
+    }
+
+    label span {
+      display: inline-block;
+      width: 9em;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<h1>Custom Form Validation Demo (using browser error display)</h1>
+<p>
+  Adapted from
+  <a href="https://wiki.selfhtml.org/wiki/JavaScript/Tutorials/Formulareingaben_mit_JavaScript_validieren">selfhtml</a>
+</p>
+
+
+<form>
+  <fieldset>
+    <legend>Passwort eingeben und bestätigen</legend>
+    <label for="password1"><span>Passwort:</span>
+      <input type="password" required id="password1"/>
+    </label>
+
+    <label for="password2"><span>Passwort bestätigen:</span>
+      <input type="password" required id="password2"/>
+    </label>
+
+    <button>Absenden</button>
+  </fieldset>
+  <p>Anmerkung: PW+Bestätigungsfeld immer vermeiden</p>
+</form>
+<script>
+  const password1 = document.getElementById('password1');
+  const password2 = document.getElementById('password2');
+
+  const checkPasswordValidity = function () {
+    if (password1.value !== password2.value) {
+      password2.setCustomValidity('Passwörter müssen übereinstimmen!');
+    } else {
+      password2.setCustomValidity('');
+    }
+  };
+
+  password1.addEventListener('change', checkPasswordValidity);
+  password2.addEventListener('change', checkPasswordValidity);
+
+</script>
+
+</body>
+</html>

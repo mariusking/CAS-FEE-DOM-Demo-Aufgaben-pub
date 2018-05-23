@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo: EventBubbling</title>
+</head>
+<body>
+<h1>Demo: EventBubbling</h1>
+<ul>
+  <li><button data-val="1">Button 1</button></li>
+  <li><button data-val="2">Button 2</button></li>
+  <li><button data-val="3">Button 3</button></li>
+  <li><button data-val="4">Button 4</button></li>
+  <li><button data-val="5">Button 5</button></li>
+</ul>
+
+<p>
+  <button>Do Nothing</button>
+</p>
+
+<div id="msgDisplay"></div>
+
+<script>
+  const msgDisplayDiv = document.getElementById("msgDisplay");
+  const showButtonMsg = function (e) {
+    msgDisplayDiv.innerHTML = "You pressed button number " + e.target.dataset.val;
+  };
+  const ulElement = document.querySelector("ul");
+  ulElement.onclick = showButtonMsg;
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inline Eventlistner using auto-gen id Global Var</title>
+</head>
+<body>
+<h1>Demo: Inline Eventlistner using auto-gen id Global Var</h1>
+
+<p>Do not rely on global variables generated from element IDs!</p>
+
+<!--Attention: not good practice: -->
+
+<label for="myRange">
+  <input id="myRange" type="range" value="20" min="10" max="90" step="10"
+      oninput="myOut.value=myRange.value; myProg.value=this.value">
+</label>
+<output id="myOut" for="myRange">20</output>
+<progress id="myProg" max="90" value="20"></progress>
+
+</body>
+</html>

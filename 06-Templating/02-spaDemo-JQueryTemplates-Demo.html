@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SPA-Demo</title>
+  <style>
+    button {
+      display: block;
+      padding: 10px;
+      margin: 10px;
+    }
+  </style>
+  <script src="jquery-3.3.1.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+  <script id="buttonsListTemplate" type="text/x-handlebars-template">
+    <h2>Buttons!</h2>
+    {{#each buttonTypes}}
+      <button data-type="{{type}}">{{greetText type}}, press me, I am a type {{type}} button</button>
+    {{/each}}
+  </script>
+</head>
+<body>
+<button id="moreButton">Add More Buttons</button>
+<section id="buttonsSection"></section>
+<p>I am just some text</p>
+<div id="out"></div>
+<script>
+
+  // Model
+
+  const buttonDescriptorsArray = [{type: 1}, {type: 3}, {type: 2}, {type: 1}];
+
+  function randomButtonDescr() {
+    const type = Math.floor(Math.random() * 3) + 1;
+    return {type};
+  }
+
+  function addRandomButton() {
+    buttonDescriptorsArray.push(randomButtonDescr());
+  }
+
+
+  // View Constants
+  const greetTexts = {
+    "1": "Hello",
+    "2": "Hi",
+    "3": "Howdi"
+  };
+
+  // View Template Setup (Handlebars)
+  Handlebars.registerHelper ("greetText", function(type) {
+    return greetTexts[type];
+  });
+
+  // View Helper-Functions
+  let currentDisplayCounter = 0;
+
+  function displayTextAndRemoveAfterInterval(displayElement, displayInterval, text) {
+    displayElement.html(text);
+    let storedDisplayCounter = ++currentDisplayCounter;
+    setTimeout(function () {
+      if (storedDisplayCounter === currentDisplayCounter) {
+        displayElement.html('')
+      }
+    }, displayInterval);
+  }
+
+
+
+  // Controller
+  $('#buttonsSection').on('click', 'button', function (event) {
+    if (event.target.dataset.type) {
+      const type = parseInt($(event.target).data().type);
+      const text = greetTexts[type];
+      displayTextAndRemoveAfterInterval($('#out'), 3000, `${text}, thank you for clicking this type ${type} button`);
+    } else {
+      console.log('click from unfit target: ' + event.target);
+    }
+  });
+
+
+
+  const generateButtonsHTMLStringFromArray = Handlebars.compile($('#buttonsListTemplate').text());
+
+  function generateButtonsHTMLString() {
+    return generateButtonsHTMLStringFromArray({buttonTypes: buttonDescriptorsArray});
+  }
+
+  function renderUI () {
+    $('#buttonsSection').html(generateButtonsHTMLString());
+  }
+
+  $('#moreButton').on('click', _=> {addRandomButton(); renderUI()});
+
+  renderUI();
+
+</script>
+
+</body>
+</html>

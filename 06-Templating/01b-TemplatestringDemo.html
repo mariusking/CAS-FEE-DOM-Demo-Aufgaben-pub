@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Template String Demo</title>
+</head>
+<body>
+<h1>Template String Demo</h1>
+<button id='button1'>Click to Show new Customer Data</button>
+<script>
+  const customerData = {
+    organization: "Neverland",
+    customers:
+        [{firstName: 'Peter', lastName: 'Pan', age: 13},
+          {firstName: 'Captain', lastName: 'Hook', age: 35}]
+  };
+  const initApp = function () {
+    const insertButton = document.getElementById("button1");
+    const createCustomersLIs = function (customerData) {
+      return customerData.customers.reduce((customersHTML, customer) =>
+          customersHTML += `<li>${customer.firstName} ${customer.firstName} : ${customerData.organization}</li>`, "");
+    };
+    const createCustomersHTML = function (customerData) {
+      return `<h2>New Customers</h2>
+       <ul>
+         ${createCustomersLIs(customerData)}
+       </ul>`
+    };
+    insertButton.onclick = function () {
+      document.body.insertAdjacentHTML("beforeend", createCustomersHTML(customerData));
+    }
+  };
+  window.onload = initApp;
+</script>
+</body>
+</html>
+ 
+ 

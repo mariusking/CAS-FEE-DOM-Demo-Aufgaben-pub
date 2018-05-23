@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo: Eventlistner (correct use)</title>
+</head>
+<body>
+<h1>Demo: Eventlistner (correct use + event arg)</h1>
+
+<label for="myRange">
+  <input id="myRange" type="range" value="20" min="10" max="90" step="10">
+</label>
+<output id="myOut" for="myRange">20</output>
+<progress id="myProg" max="90" value="20"></progress>
+
+<script>
+
+  const myRangeElement = document.getElementById("myRange");
+  const myOutElement = document.getElementById("myOut");
+  const myProgElement = document.querySelector("#myProg"); //alternative
+
+  const displayRangeValue = function (event) {
+    myOutElement.value = myRangeElement.value;
+    myProgElement.value = event.target.value;
+  };
+
+  myRangeElement.oninput = displayRangeValue;
+
+</script>
+</body>
+</html>

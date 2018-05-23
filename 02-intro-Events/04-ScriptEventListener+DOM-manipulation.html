@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eventlistner using auto-gen id Global Var</title>
+</head>
+<body>
+<h1>Demo: Eventlistner using auto-gen id Global Var</h1>
+
+<p>Do not rely on global variables generated from element IDs!</p>
+
+<!--Attention: not good practice: -->
+
+<label for="myRange">
+  <input id="myRange" type="range" value="20" min="10" max="90" step="10">
+</label>
+<output id="myOut" for="myRange">20</output>
+<progress id="myProg" max="90" value="20"></progress>
+
+<script>
+
+  //demo-1: uncomment -> will break / recomment
+  // const myRange = {};
+  myRange.oninput = function () {
+    myOut.value = myRange.value;
+    myProg.value = this.value;
+  };
+
+  //demo-2 uncomment -> will break (string only works in HTML)/ recomment
+  //myRange.oninput = "myOut.value=myRange.value; myProg.value=this.value";
+
+  //demo-3 uncomment -> will break ('this' in arrow functions is dangerous)/ recomment
+  // myRange.oninput =  () => {
+  //   myOut.value = myRange.value;
+  //   myProg.value = this.value;
+  // };
+
+</script>
+</body>
+</html>

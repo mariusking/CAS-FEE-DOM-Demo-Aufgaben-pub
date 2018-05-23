@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EventBubblingDemo</title>
+</head>
+<body id="body">
+<div id="div1">
+  <div id="div2">
+    <div id="div3">
+      <div id="div4">
+        <button id="btn1">click me</button>
+      </div>
+    </div>
+  </div>
+  <output></output>
+</div>
+
+<script>
+  const btn = document.querySelector("button");
+  const divs = document.querySelectorAll("div");
+  const out = document.querySelector("output");
+  const traceFn = function(e) {
+    out.value = out.value + " | " + this.id;
+    if (this.id == "div2") {
+      e.stopPropagation();
+    }
+  };
+  btn.onclick = traceFn;
+  document.body.onclick = traceFn;
+  for (const div of divs) {
+    div.onclick = traceFn;
+  };
+</script>
+</body>
+</html>

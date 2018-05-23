@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page Lifecycle Demo</title>
+  <script>
+    console.log("head script execution start");
+    window.onload = _ => console.log("window.onload");
+    window.addEventListener('load', _ => console.log("window.addEventListener(load)"));
+    document.onDOMContentLoaded = _ => console.log("document.onDOMContentLoaded"); // not working
+    document.addEventListener('DOMContentLoaded', _ => console.log("document.addEventListener(DOMContentLoaded)"));
+    window.onbeforeunload = _ => { console.log("window.onbeforeunload"); return "leave?"}; //addEventHandler('beforeunload') no display
+    console.log("head script execution end");
+  </script>
+</head>
+<body>
+<h1>Page Lifecycle Demo</h1>
+<script>console.log("bottom script executed")</script>
+</body>
+</html>

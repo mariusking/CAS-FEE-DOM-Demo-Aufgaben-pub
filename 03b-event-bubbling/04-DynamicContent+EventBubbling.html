@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Content V2 + EventBubbling</title>
+</head>
+<body>
+<h1>Demo: Dynamic Content + EventBubbling</h1>
+<p>
+  <button id="addBtn">Add a Button</button>
+</p>
+
+<ul>
+  <li><button data-val="1">Button 1</button></li>
+  <li><button data-val="2">Button 2</button></li>
+</ul>
+
+
+<div id="msgDisplay"></div>
+
+<script>
+  const ulElement = document.querySelector("ul");
+  const addBtn = document.querySelector("#addBtn");
+
+  let buttonCount = 2;
+  const addButton = function () {
+    const buttonElement = document.createElement("button");
+    buttonElement.dataset.val = ++buttonCount;
+    buttonElement.innerText = "Button " + buttonCount;
+    const liElement = document.createElement("li");
+    liElement.appendChild(buttonElement);
+    ulElement.appendChild(liElement);
+  };
+  addBtn.onclick = addButton;
+
+  const msgDisplayDiv = document.getElementById("msgDisplay");
+  const showButtonMsg = function (e) {
+    msgDisplayDiv.innerHTML = "You pressed button number " + e.target.dataset.val;
+  };
+  ulElement.onclick = showButtonMsg;
+</script>
+</body>
+</html>

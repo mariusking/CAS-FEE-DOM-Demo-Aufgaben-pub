@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de-ch">
+<head>
+    <meta charset="UTF-8">
+    <title>HalloWelt</title>
+</head>
+<body>
+<h1>Hallo Welt</h1>
+<label>
+    Geben Sie Ihren Namen ein:
+    <input id="name" autofocus>
+</label>
+<button id="greetBtn">Grüss Mich</button>
+<div id="greetDiv"></div>
+
+<script>
+  // View Refs
+  const input = document.getElementById('name');
+  const greetOutput = document.getElementById('greetDiv');
+  const button = document.getElementById('greetBtn');
+
+  // RenderFn
+  const renderUI = function () {
+    greetOutput.innerHTML = 'Hallo ' + input.value;
+  };
+
+  // Controller
+  //button.on = addEventListener;
+  button.addEventListener('click', renderUI);
+</script>
+</body>
+</html>

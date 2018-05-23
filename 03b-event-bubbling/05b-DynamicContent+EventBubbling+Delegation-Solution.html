@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Content V2 + EventBubbling with Delegation</title>
+  <style>
+    button > img {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+<h1>Demo: Dynamic Content + EventBubbling with Delegation</h1>
+<p>
+  <button id="addBtn">Add a Button</button>
+</p>
+
+<ul>
+  <li><button data-val="1"><img src="Deletion_icon.svg"> Button 1 </button></li>
+  <li><button data-val="2"><img src="Deletion_icon.svg"> Button 2</button></li>
+</ul>
+
+
+<div id="msgDisplay"></div>
+
+<script>
+  const ulElement = document.querySelector("ul");
+  const addBtn = document.querySelector("#addBtn");
+
+  let buttonCount = 2;
+  const nextButtonHtml = function () {
+    return `<li><button data-val="${++buttonCount}"><img src="Deletion_icon.svg"> Button ${buttonCount}</button></li>`
+  }
+  const addButton = function () {
+    ulElement.insertAdjacentHTML("beforeend",  nextButtonHtml());
+  };
+  addBtn.onclick = addButton;
+
+  const msgDisplayDiv = document.getElementById("msgDisplay");
+  const showButtonMsg = function (e) {
+    const button = event.target.closest("button");
+    msgDisplayDiv.innerHTML = "You pressed button number " + button.dataset.val;
+  };
+  ulElement.onclick = showButtonMsg;
+</script>
+</body>
+</html>

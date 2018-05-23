@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LayeredCount1</title>
+</head>
+<body>
+<h1>Layered Count 1</h1>
+<p>
+  <button id="upBtn">Count Up</button>
+</p>
+<p>
+  <button id="downBtn">Count Down</button>
+</p>
+
+Current Count:
+<div id="countDiv">0</div>
+
+<script>
+  const initApp = function () {
+
+    // app-state // model
+    let count = 0;
+
+    function countUp() {
+      count++
+    }
+
+    function countDown() {
+      count--
+    }
+
+    // UI-Refs
+    const countDiv = document.getElementById('countDiv');
+    const upButton = document.getElementById('upBtn');
+    const downButton = document.getElementById('downBtn');
+
+
+    // Update / Render
+    const renderUI = function () {
+      countDiv.innerHTML = count;
+    };
+
+    // Controller / Event Listener
+    upButton.onclick = function () {
+      countUp();
+      renderUI();
+    };
+    downButton.onclick = function () {
+      countDown();
+      renderUI();
+    };
+    
+    //initUI
+    renderUI();
+  };
+
+  window.onload = initApp;
+</script>
+</body>
+</html>

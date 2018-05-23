@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example: Selectors using JQuery</title>
+  <style>
+    label, #marked-text {
+      display: block;
+    }
+
+    #marked-text {
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .marked {
+      background-color: gold;
+      border: solid blue 2px;
+    }
+  </style>
+  <script src="./jquery-3.3.1.js"></script>
+  
+</head>
+<body>
+<h1>Example: Selectors using JQuery</h1>
+
+
+<label for="start-chooser">Start marking at
+  <input id="start-chooser" type="range" min="1" max="10" value="2">
+  <output id="start"></output>
+</label>
+
+<label for="nth-chooser">Mark each n-th
+  <input id="nth-chooser" type="range" min="1" max="10" value="2">
+  <output id="nth"></output>
+</label>
+
+<label for="marked-text">Marked Text:
+  <output id="marked-text"></output>
+</label>
+
+
+<ul>
+  <li>One</li>
+  <li>Two</li>
+  <li>Tree</li>
+  <li>Four</li>
+  <li>Five</li>
+  <li>Six</li>
+  <li>Seven</li>
+  <li>Eight</li>
+  <li>Nine</li>
+  <li>Ten</li>
+</ul>
+
+<script>
+  function initApp() {
+
+    const startChooser = $("#start-chooser");
+    const nthChooser = $("#nth-chooser");
+    const startOutput = $("#start");
+    const nthOutput = $("#nth");
+    const allLi = $("li");
+    const markedTextOutput = $("#marked-text");
+
+    const unmarkAll = function () {
+      //could be using for-of
+      allLi.removeClass('marked');
+    };
+
+    const mark = function () {
+      unmarkAll();
+      const selectorString = `li:nth-child(${nthChooser.val()}n+${startChooser.val()})`;
+      const toMarkLi = $(selectorString);
+      toMarkLi.addClass('marked');
+      //two possible ways:
+      // (1) use the mapFn of the jQ-Object, then transform into array and join
+      markedTextOutput.val(toMarkLi.map((indx, liElm) => liElm.innerHTML).get().join(", "));
+      // (2) first transform JQ-Object into Array, than map and join the array
+      //markedTextOutput.val(toMarkLi.get().map((liElm) => liElm.innerHTML).join(", "));
+    };
+
+
+    const updateStart = function () {
+      startOutput.val(startChooser.val());
+      mark();
+    };
+    startChooser.on('input', updateStart);
+
+    const updateNth = function () {
+      if (nthChooser.value === "1") {
+        nthOutput.val("every");
+      } else {
+        if (nthChooser.val() === "2") {
+          nthOutput.val("2nd");
+        } else {
+          nthOutput.val(nthChooser.val() + "th");
+        }
+      }
+      mark();
+    };
+    nthChooser.on('input', updateNth);
+
+    const initUi = function () {
+      updateStart();
+      updateNth();
+    };
+
+    initUi();
+  }
+
+  $(initApp);
+
+</script>
+
+</body>
+</html>

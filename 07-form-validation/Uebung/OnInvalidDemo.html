@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OnInvalidDemo</title>
+  <style>
+    input:invalid {
+      background-color: lavenderblush;
+    }
+  </style>
+</head>
+<body>
+<h1>OnInvalidDemo</h1>
+<form id="frm">
+<label for="myInput">Type 6 Chars
+  <input type="text" id="myInput" name="myInput" pattern=".{6,}" required>
+</label>
+  <button>Send</button>
+</form>
+<button id="checkBtn">checkBtn</button>
+<script>
+  function invalidLogger() {
+    console.log("invalid");
+  }
+  document.getElementById("myInput").addEventListener("invalid", invalidLogger);
+  document.getElementById("checkBtn").addEventListener("click", () => frm.checkValidity());
+
+</script>
+</body>
+</html>
